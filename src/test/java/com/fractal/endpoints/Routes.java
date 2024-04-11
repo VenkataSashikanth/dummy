@@ -6,11 +6,11 @@ public class Routes {
 //    #Local
 //    public static String base_url="http://localhost:9564/api/v1";
 //    #QA
-//    public static String base_url="http://3.110.77.143:9564/api/v1";
+    public static String base_url="http://3.110.77.143:9564/api/v1";
 //    #Prod
 //    public static String base_url="http://13.233.148.88:8085/api/v1";
 //    #Pre-Prod
-    public static String base_url="http://3.111.37.114:8085/api/v1";
+//    public static String base_url="http://3.111.37.114:8085/api/v1";
 
 
 

@@ -3,11 +3,11 @@ package com.fractal.test.candidateSignup;
 import com.fractal.endpoints.Endpoints;
 import com.fractal.test.Base;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
+import static org.testng.Assert.*;
 
 public class CandidateBasicDetails extends Base {
 
@@ -23,7 +23,7 @@ public class CandidateBasicDetails extends Base {
         response.then().statusCode(200);
         response.then().time(lessThan(500L));
         response.then().body("status", equalTo("OK"));
-        Assert.assertEquals(response.jsonPath().getString("message"),"Data retrieved successfully");
-        Assert.assertEquals(response.jsonPath().getString("data.phoneNumber"),readConfig.getPhoneCode()+readConfig.getCandidateMobileNumber());
+        assertEquals(response.jsonPath().getString("message"),"Data retrieved successfully");
+        assertEquals(response.jsonPath().getString("data.phoneNumber"),readConfig.getPhoneCode()+readConfig.getCandidateMobileNumber());
     }
 }

@@ -5,11 +5,11 @@ import com.fractal.payload.CandidateDetails;
 import com.fractal.test.Base;
 import com.fractal.utilities.Authorization;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
+import static org.testng.Assert.*;
 
 public class BasicDetails extends Base {
     CandidateDetails candidateDetails;
@@ -29,8 +29,8 @@ public class BasicDetails extends Base {
             response.then().statusCode(400);
             response.then().time(lessThan(500L));
             response.then().body("status", equalTo("BAD_REQUEST"));
-            Assert.assertEquals(response.jsonPath().getString("message"),"Please enter email");
-            Assert.assertNull(response.jsonPath().get("data"));
+            assertEquals(response.jsonPath().getString("message"),"Please enter email");
+            assertNull(response.jsonPath().get("data"));
         }else {
             System.out.println("Candidate is not First Time Login and has Already updated his Basic details");
         }
@@ -50,8 +50,8 @@ public class BasicDetails extends Base {
             response.then().statusCode(400);
             response.then().time(lessThan(500L));
             response.then().body("status", equalTo("BAD_REQUEST"));
-            Assert.assertEquals(response.jsonPath().getString("message"),"Please enter full name");
-            Assert.assertNull(response.jsonPath().get("data"));
+            assertEquals(response.jsonPath().getString("message"),"Please enter full name");
+            assertNull(response.jsonPath().get("data"));
         }else {
             System.out.println("Candidate is not First Time Login and has Already updated his Basic details");
         }
@@ -72,8 +72,8 @@ public class BasicDetails extends Base {
             response.then().statusCode(400);
             response.then().time(lessThan(500L));
             response.then().body("status", equalTo("BAD_REQUEST"));
-            Assert.assertEquals(response.jsonPath().getString("message"),"Email already registered");
-            Assert.assertNull(response.jsonPath().get("data"));
+            assertEquals(response.jsonPath().getString("message"),"Email already registered");
+            assertNull(response.jsonPath().get("data"));
         }else {
             System.out.println("Candidate is not First Time Login and has Already updated his Basic details");
         }
@@ -94,8 +94,8 @@ public class BasicDetails extends Base {
             response.then().statusCode(400);
             response.then().time(lessThan(500L));
             response.then().body("status", equalTo("BAD_REQUEST"));
-            Assert.assertEquals(response.jsonPath().getString("message"),"Invalid email pattern! Please check once....");
-            Assert.assertNull(response.jsonPath().get("data"));
+            assertEquals(response.jsonPath().getString("message"),"Invalid email pattern! Please check once....");
+            assertNull(response.jsonPath().get("data"));
         }else {
             System.out.println("Candidate is not First Time Login and has Already updated his Basic details");
         }
@@ -117,10 +117,10 @@ public class BasicDetails extends Base {
             response.then().statusCode(200);
             response.then().time(lessThan(500L));
             response.then().body("status", equalTo("OK"));
-            Assert.assertEquals(response.jsonPath().getString("message"),"Data saved successfully");
-            Assert.assertEquals(response.jsonPath().getString("data.phoneNumber"),readConfig.getPhoneCode()+readConfig.getCandidateMobileNumber());
-            Assert.assertEquals(response.jsonPath().getString("data.fullName"),readConfig.getCandidateName());
-            Assert.assertEquals(response.jsonPath().getString("data.email"),readConfig.getCandidateEmail());
+            assertEquals(response.jsonPath().getString("message"),"Data saved successfully");
+            assertEquals(response.jsonPath().getString("data.phoneNumber"),readConfig.getPhoneCode()+readConfig.getCandidateMobileNumber());
+            assertEquals(response.jsonPath().getString("data.fullName"),readConfig.getCandidateName());
+            assertEquals(response.jsonPath().getString("data.email"),readConfig.getCandidateEmail());
         }else {
             System.out.println("Candidate is not First Time Login and has Already updated his Basic details");
         }

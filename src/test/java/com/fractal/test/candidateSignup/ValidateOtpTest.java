@@ -5,11 +5,11 @@ import com.fractal.payload.CandidatePayload;
 import com.fractal.utilities.Authorization;
 import com.fractal.utilities.ReadConfig;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
+import static org.testng.Assert.*;
 
 public class ValidateOtpTest {
     String authorizationToken;
@@ -31,7 +31,7 @@ public class ValidateOtpTest {
         response.then().statusCode(400);
         response.then().time(lessThan(500L));
         response.then().body("status", equalTo("BAD_REQUEST"));
-        Assert.assertNull(response.jsonPath().get("data"));
+        assertNull(response.jsonPath().get("data"));
     }
 
     @Test(priority = 2)
@@ -49,7 +49,7 @@ public class ValidateOtpTest {
         response.then().statusCode(400);
         response.then().time(lessThan(500L));
         response.then().body("status", equalTo("BAD_REQUEST"));
-        Assert.assertNull(response.jsonPath().get("data"));
+        assertNull(response.jsonPath().get("data"));
     }
 
     @Test(priority = 3)
@@ -67,8 +67,8 @@ public class ValidateOtpTest {
         response.then().statusCode(400);
         response.then().time(lessThan(500L));
         response.then().body("status", equalTo("BAD_REQUEST"));
-        Assert.assertNull(response.jsonPath().get("data"));
-        Assert.assertEquals(response.jsonPath().getString("message"),"Invalid OTP, Please check once......");
+        assertNull(response.jsonPath().get("data"));
+        assertEquals(response.jsonPath().getString("message"),"Invalid OTP, Please check once......");
     }
 
     @Test(priority = 4)
@@ -86,8 +86,8 @@ public class ValidateOtpTest {
         response.then().statusCode(400);
         response.then().time(lessThan(500L));
         response.then().body("status", equalTo("BAD_REQUEST"));
-        Assert.assertNull(response.jsonPath().get("data"));
-        Assert.assertEquals(response.jsonPath().getString("message"),"Invalid OTP, Please check once......");
+        assertNull(response.jsonPath().get("data"));
+        assertEquals(response.jsonPath().getString("message"),"Invalid OTP, Please check once......");
     }
 
 //    @Test(priority = 5)
@@ -106,10 +106,10 @@ public class ValidateOtpTest {
         response.then().statusCode(200);
         response.then().time(lessThan(2000L));
         response.then().body("status", equalTo("OK"));
-        Assert.assertEquals(response.jsonPath().getString("message"),"Your Otp  verified successfully !! , Welcome to f360 :)");
+        assertEquals(response.jsonPath().getString("message"),"Your Otp  verified successfully !! , Welcome to f360 :)");
         authorizationToken=response.jsonPath().getString("data.authToken");
         Authorization.setAuthorizationToken(authorizationToken);
-        Assert.assertEquals(response.jsonPath().getString("data.phoneNumber"),readConfig.getPhoneCode()+readConfig.getCandidateMobileNumber());
+        assertEquals(response.jsonPath().getString("data.phoneNumber"),readConfig.getPhoneCode()+readConfig.getCandidateMobileNumber());
 
         boolean isFirstTimeLogin = response.jsonPath().getBoolean("data.isFirstTimeLogin");
         Authorization.setIsFirstTimeLogin(isFirstTimeLogin);
@@ -120,6 +120,6 @@ public class ValidateOtpTest {
         boolean hasRegisteredDrives = response.jsonPath().getBoolean("data.hasRegisteredDrives");
         Authorization.setHasRegisteredDrives(hasRegisteredDrives);
 
-        Assert.assertEquals(response.jsonPath().getString("data.userRole"),"CANDIDATE");
+        assertEquals(response.jsonPath().getString("data.userRole"),"CANDIDATE");
     }
 }

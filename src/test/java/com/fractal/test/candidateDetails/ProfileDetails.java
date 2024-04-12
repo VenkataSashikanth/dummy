@@ -8,14 +8,14 @@ import com.fractal.payload.CandidateProfileDetails;
 import com.fractal.test.Base;
 import com.fractal.utilities.Authorization;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.lessThan;
+
+import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.*;
 
 public class ProfileDetails extends Base {
     CandidateProfileDetails candidateProfileDetails;
@@ -71,8 +71,8 @@ public class ProfileDetails extends Base {
             response.then().statusCode(200);
             response.then().time(lessThan(500L));
             response.then().body("status", equalTo("OK"));
-            Assert.assertEquals(response.jsonPath().getString("message"),"Dear user, your profile details saved successfully!!");
-            Assert.assertEquals(response.jsonPath().getString("data.phoneNumber"),readConfig.getPhoneCode()+readConfig.getCandidateMobileNumber());
+            assertEquals(response.jsonPath().getString("message"),"Dear user, your profile details saved successfully!!");
+            assertEquals(response.jsonPath().getString("data.phoneNumber"),readConfig.getPhoneCode()+readConfig.getCandidateMobileNumber());
         }
     }
 }

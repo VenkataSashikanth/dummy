@@ -3,11 +3,10 @@ package com.fractal.test.logOut;
 import com.fractal.endpoints.Endpoints;
 import com.fractal.test.Base;
 import io.restassured.response.Response;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
+import static org.testng.Assert.*;
 
 public class LogOut extends Base {
 
@@ -21,7 +20,7 @@ public class LogOut extends Base {
         response.then().statusCode(200);
         response.then().time(lessThan(500L));
         response.then().body("status", equalTo("OK"));
-        Assert.assertEquals(response.jsonPath().getString("message"),"You've been logged out successfully.");
-        Assert.assertNull(response.jsonPath().get("data"));
+        assertEquals(response.jsonPath().getString("message"),"You've been logged out successfully.");
+        assertNull(response.jsonPath().get("data"));
     }
 }
